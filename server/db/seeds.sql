@@ -1,13 +1,19 @@
 -- Cyber Security Training Web App Seed Data
 -- Password for all users: 'password' (bcrypt hash with 10 rounds)
+--
+-- TEST ACCOUNTS (for local development)
+--   Admin:    admin@company.com   / password
+--   Employee: emp1@company.com    / password
 
 -- ============================================================
 -- USERS
 -- ============================================================
 INSERT INTO users (email, password_hash, full_name, role, department) VALUES
+  -- Test admin account
   ('admin@company.com',    '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPVyH4P7V2S', 'Admin User',      'admin',    'IT Department'),
   ('manager1@company.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPVyH4P7V2S', 'Sales Manager',   'manager',  'Sales Department'),
   ('manager2@company.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPVyH4P7V2S', 'HR Manager',      'manager',  'HR Department'),
+  -- Test employee account
   ('emp1@company.com',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPVyH4P7V2S', 'Alice Johnson',   'employee', 'Sales Department'),
   ('emp2@company.com',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPVyH4P7V2S', 'Bob Smith',       'employee', 'Sales Department'),
   ('emp3@company.com',     '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPVyH4P7V2S', 'Carol White',     'employee', 'HR Department'),
