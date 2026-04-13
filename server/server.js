@@ -1,5 +1,16 @@
 require('dotenv').config();
 
+// Validate required environment variables before anything else
+const REQUIRED_ENV = ['DATABASE_URL', 'JWT_SECRET', 'JWT_REFRESH_SECRET'];
+const missingEnv = REQUIRED_ENV.filter((key) => !process.env[key]);
+if (missingEnv.length > 0) {
+  console.error(
+    `Missing required environment variables: ${missingEnv.join(', ')}\n` +
+    'Copy server/.env.example to server/.env and fill in the values.'
+  );
+  process.exit(1);
+}
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -79,7 +90,11 @@ app.use((req, res) => {
 // Global error handler
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server error' });
+  const isDev = process.env.NODE_ENV !== 'production';
+  res.status(500).json({
+    error: 'Internal server error',
+    ...(isDev && { detail: err.message }),
+  });
 });
 
 const PORT = process.env.PORT || 5000;

@@ -228,15 +228,38 @@ npm run preview     # Preview the production build locally
 
 ## Deployment
 
-The frontend is configured for deployment to [Vercel](https://vercel.com/) via `vercel.json`.
+### Frontend — Vercel (free)
 
-Set the following environment variable in your Vercel project settings:
+The frontend is configured for deployment to [Vercel](https://vercel.com/) via `vercel.json`. Vercel's **Hobby plan is completely free** and automatically gives you a `yourproject.vercel.app` subdomain — no domain purchase is required.
+
+1. Push the repository to GitHub and import it in the Vercel dashboard.
+2. Vercel will detect the `vercel.json` settings and build the `client/` directory automatically.
+3. Set the following environment variable in your Vercel project settings:
 
 | Variable       | Value |
 |----------------|-------|
 | `VITE_API_URL` | URL of your deployed backend API |
 
-The backend can be deployed to any Node.js-compatible host (e.g. Railway, Render, Fly.io). Make sure to set all backend environment variables in your hosting provider's settings and set `ALLOWED_ORIGINS` to the URL of your deployed frontend.
+### Backend — Render (free)
+
+[Render](https://render.com/) offers a free tier for both Node.js web services and PostgreSQL databases:
+
+1. Create a new **Web Service** pointing to the `server/` directory.
+   - Build command: `npm install`
+   - Start command: `npm start`
+2. Create a new **PostgreSQL** database on Render (free 1 GB).
+3. Set all backend environment variables in Render's **Environment** tab (see [Environment Variables](#environment-variables)).
+4. Run the schema against the Render database once:
+   ```bash
+   psql <RENDER_DATABASE_URL> -f server/db/schema.sql
+   ```
+5. Set `ALLOWED_ORIGINS` to your Vercel frontend URL (e.g. `https://yourproject.vercel.app`).
+
+### Database — Neon (free alternative)
+
+[Neon](https://neon.tech/) provides a free serverless PostgreSQL database (no credit card required). Use the connection string it gives you as `DATABASE_URL` in your backend host's environment settings.
+
+> **Tip:** You can also keep the backend on any Node.js-compatible host (Railway, Fly.io, etc.) — just make sure to set all the required environment variables there.
 
 ---
 
