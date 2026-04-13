@@ -1,5 +1,16 @@
 require('dotenv').config();
 
+// Fail fast if required environment variables are missing
+const REQUIRED_ENV = ['JWT_SECRET', 'JWT_REFRESH_SECRET', 'DATABASE_URL'];
+const missingEnv = REQUIRED_ENV.filter((key) => !process.env[key]);
+if (missingEnv.length > 0) {
+  console.error(
+    `Missing required environment variables: ${missingEnv.join(', ')}\n` +
+    'Copy server/.env.example to server/.env and fill in the values.'
+  );
+  process.exit(1);
+}
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');

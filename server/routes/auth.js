@@ -7,7 +7,9 @@ const router = express.Router();
 
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
-  const { email, password, full_name, role = 'employee', department } = req.body;
+  // role is intentionally ignored from the request body – all self-registered
+  // users start as 'employee'. Admins/managers must be promoted by an admin.
+  const { email, password, full_name, department } = req.body;
 
   if (!email || !password || !full_name) {
     return res.status(400).json({ error: 'email, password, and full_name are required' });
@@ -22,9 +24,9 @@ router.post('/register', async (req, res) => {
     const password_hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
       `INSERT INTO users (email, password_hash, full_name, role, department)
-       VALUES ($1, $2, $3, $4, $5)
+       VALUES ($1, $2, $3, 'employee', $4)
        RETURNING id, email, full_name, role, department, created_at`,
-      [email, password_hash, full_name, role, department || null]
+      [email, password_hash, full_name, department || null]
     );
 
     const user = result.rows[0];
