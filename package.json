@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "build:client": "npm --prefix ./client install && npm --prefix ./client run build"
+    "build": "npm --prefix client run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
