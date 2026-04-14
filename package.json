@@ -1,0 +1,12 @@
+{ 
+  "name": "cybercy", 
+  "version": "1.0.0", 
+  "description": "Cyber Security Training App", 
+  "main": "server/server.js", 
+  "scripts": { 
+    "start": "node server/server.js", 
+    "dev": "nodemon server/server.js" 
+  }, 
+  "dependencies": {}, 
+  "devDependencies": {} 
+} 
