@@ -69,6 +69,13 @@ router.post('/login', async (req, res) => {
     res.json({ accessToken, refreshToken, user: userInfo });
   } catch (err) {
     console.error('Login error:', err);
+    
+    // If it's a database auth error, tell the user to check their .env
+    if (err.code === '28P01') {
+      console.error('DATABASE AUTH FAILED - Check DATABASE_URL in .env file');
+      return res.status(503).json({ error: 'Database service unavailable' });
+    }
+
     res.status(500).json({ error: 'Internal server error' });
   }
 });

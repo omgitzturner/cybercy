@@ -40,7 +40,7 @@ export default function Dashboard() {
           leaderboardAPI.getUserBadges(user.id),
           leaderboardAPI.getLeaderboard(),
         ]);
-        if (progressRes.status === 'fulfilled') setProgress(progressRes.value.data || []);
+        if (progressRes.status === 'fulfilled') setProgress(progressRes.value.data.lessons || []);
         if (assignRes.status === 'fulfilled') setAssignments(assignRes.value.data || []);
         if (badgesRes.status === 'fulfilled') setBadges(badgesRes.value.data || []);
         if (lbRes.status === 'fulfilled') setLeaderboard(lbRes.value.data || []);
