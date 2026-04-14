@@ -1,4 +1,0 @@
-{
-  "buildCommand": "",
-  "startCommand": "node server/server.js"
-}
