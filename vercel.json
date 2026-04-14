@@ -1,4 +1,4 @@
 {
-  "buildCommand": "npm run build --prefix client",
+  "buildCommand": "bash -c 'cd client && npm run build'",
   "outputDirectory": "client/dist"
 }
