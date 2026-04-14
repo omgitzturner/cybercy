@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "build": "npm --prefix client run build"
+    "build": "echo 'Backend only - no build needed'"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
